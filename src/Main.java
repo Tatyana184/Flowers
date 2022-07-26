@@ -5,9 +5,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main {
-    static JFrame frame;
-    public static void main(String[] args) throws IOException {
 
+    public static void main(String[] args) throws IOException {
+        JFrame frame;
         BufferedImage image = ImageIO.read(new File("src/19.png"));
         BufferedImage image2 = ImageIO.read(new File("src/20.png")) ;
         BufferedImage image3 = ImageIO.read(new File("src/205.png")) ;
@@ -28,19 +28,9 @@ public class Main {
         wIcon2.setBounds(300 - width2/2 , 300 - height2/2  , width2, height2);// установка картинки по середине
         frame.add(wIcon2);
 
-        Calculate(wIcon, image);
-        Calculate(wIcon3, image3);
+        new JThread(wIcon, image, frame).start();
+        new JThread(wIcon3, image3,frame).start();
 
 
-    }
-
-    private static void Calculate(JLabel wIcon, BufferedImage image) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-
-        wIcon.setBounds(300 - width/2, 300/20, width,height);
-        frame.add(wIcon);
-
-        new JThread(wIcon, image).start();
     }
 }

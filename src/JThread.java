@@ -1,11 +1,14 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class JThread extends Thread{
     JLabel wIcon;
     BufferedImage image;
-    JThread(JLabel wIcon, BufferedImage image){
+    Frame frame;
+    JThread(JLabel wIcon, BufferedImage image, Frame frame){
+     this.frame = frame;
      this.wIcon = wIcon;
      this.image = image;
 
@@ -22,6 +25,7 @@ public class JThread extends Thread{
             try {//сперва работает таймер
                 Thread.sleep((int) (Math.random() * 30));
                 wIcon.setBounds((int) (radius*Math.cos(t*Math.PI/180))+deltaX, (int) (radius*Math.sin(t*Math.PI/180))+deltaY, image.getWidth(),image.getHeight());
+           frame.add(wIcon);
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
